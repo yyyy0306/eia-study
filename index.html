@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>环评考试重点复习库</title>
+  <title>环评考试重难点浓缩手册</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -11,78 +11,68 @@
     <header class="topbar">
       <div class="shell topbar-inner">
         <div>
-          <p class="eyebrow">EIA EXAM STUDIO</p>
-          <h1>环评考试重点复习库</h1>
-          <p class="subhead">章节学习、知识点速查、错题本、高频难点、模拟考试，一套网页直接打开。</p>
+          <p class="eyebrow">EIA HIGH-YIELD NOTES</p>
+          <h1>环评考试重难点浓缩手册</h1>
+          <p class="subhead">按章节整理核心框架、易错辨析、案例答题句式和考前速记。少刷题，多看能提分的浓缩资料。</p>
         </div>
         <div class="top-actions">
           <button class="icon-btn" id="themeBtn" title="切换深浅色">◐</button>
-          <button class="btn" id="exportBtn">导出进度</button>
-          <label class="btn ghost" for="importFile">导入进度</label>
-          <input id="importFile" type="file" accept="application/json" hidden>
+          <button class="btn" id="printBtn">打印资料</button>
         </div>
       </div>
     </header>
 
     <main class="shell">
-      <section class="dashboard">
+      <section class="dashboard notes-dashboard">
         <div class="search-panel">
-          <label for="searchInput">搜索知识点</label>
-          <div class="search-grid">
-            <input id="searchInput" type="search" placeholder="例如：公众参与、总纲、事故池、危废、评价范围">
+          <label for="searchInput">搜索章节 / 重难点 / 易错词</label>
+          <div class="search-grid notes-search">
+            <input id="searchInput" type="search" placeholder="例如：依托工程、地下水、公众参与、非正常工况、达标分析">
             <select id="subjectSelect"></select>
-            <select id="statusSelect">
-              <option value="全部">全部</option>
-              <option value="高频">高频</option>
-              <option value="常考">常考</option>
-              <option value="收藏">收藏</option>
-              <option value="薄弱">薄弱</option>
-              <option value="掌握">掌握</option>
-            </select>
           </div>
           <nav class="tabs" id="tabs">
-            <button class="tab active" data-view="chapters">章节学习</button>
-            <button class="tab" data-view="library">知识点库</button>
-            <button class="tab" data-view="hard">高频难点</button>
-            <button class="tab" data-view="quiz">练习自测</button>
-            <button class="tab" data-view="wrong">错题本</button>
-            <button class="tab" data-view="mock">模拟考试</button>
-            <button class="tab" data-view="progress">复习进度</button>
+            <button class="tab active" data-view="manual">重难点手册</button>
+            <button class="tab" data-view="quick">考前速记</button>
+            <button class="tab" data-view="index">关键词索引</button>
           </nav>
         </div>
-        <aside class="stats">
-          <div><strong id="topicCount">0</strong><span>知识点</span></div>
-          <div><strong id="questionCount">0</strong><span>练习题</span></div>
-          <div><strong id="doneCount">0</strong><span>已掌握</span></div>
-          <div><strong id="weakCount">0</strong><span>薄弱点</span></div>
+        <aside class="stats compact-stats">
+          <div><strong id="sectionCount">0</strong><span>章节</span></div>
+          <div><strong id="pointCount">0</strong><span>重难点</span></div>
+          <div><strong id="visibleCount">0</strong><span>当前显示</span></div>
+          <div><strong id="quickCount">0</strong><span>速记句</span></div>
         </aside>
       </section>
 
-      <section class="intel">
-        <div class="intel-card"><h2>高频雷达</h2><div id="radar"></div></div>
-        <div class="intel-card"><h2>案例题眼词</h2><div class="word-cloud" id="wordCloud"></div></div>
-        <div class="intel-card"><h2>今日建议</h2><ol id="todayPlan"></ol></div>
+      <section class="intel notes-intel">
+        <div class="intel-card"><h2>答题总框架</h2><ol><li>先判断程序和文件类型</li><li>再核工程分析和评价范围</li><li>再看因子、现状、预测是否支撑结论</li><li>最后看措施、风险、监测、验收是否闭环</li></ol></div>
+        <div class="intel-card"><h2>高频易错词</h2><div class="word-cloud" id="wordCloud"></div></div>
+        <div class="intel-card"><h2>考前最该背</h2><ol id="todayPlan"></ol></div>
       </section>
 
-      <section class="view active" id="chaptersView"><div class="chapter-layout"><aside class="chapter-nav" id="chapterNav"></aside><article class="chapter-main" id="chapterMain"></article></div></section>
-      <section class="view" id="libraryView"><div class="result-line"><span id="resultText"></span><span>状态会自动保存在当前浏览器</span></div><div class="cards" id="cards"></div></section>
-      <section class="view" id="hardView"><div class="result-line"><span>高频难点专项</span><span>更接近案例分析和综合判断</span></div><div class="hard-list" id="hardList"></div></section>
-      <section class="view" id="quizView"><div class="quiz-card"><h2>随机练习</h2><p>先自己回答，再展开答案。不会的题标为错题或薄弱。</p><div class="quiz-box" id="quizBox"></div><div class="actions"><button class="btn primary" id="drawBtn">随机抽题</button><button class="btn" id="answerBtn">展开答案</button><button class="btn weak" id="markWrongBtn">加入错题</button><button class="btn weak" id="markWeakBtn">标为薄弱</button></div></div></section>
-      <section class="view" id="wrongView"><div class="result-line"><span id="wrongTitle">错题本</span><span>错题存在当前浏览器，可导出备份</span></div><div class="hard-list" id="wrongList"></div></section>
-      <section class="view" id="mockView"><div class="quiz-card"><h2>模拟考试</h2><p>每次抽 10 道题，提交后显示分数、错题和解析。</p><div class="exam-meta" id="examMeta"></div><div class="mock-list" id="mockList"></div><div class="actions"><button class="btn primary" id="newMockBtn">生成新试卷</button><button class="btn" id="submitMockBtn">交卷评分</button></div></div></section>
-      <section class="view" id="progressView"><div class="progress-list" id="progressList"></div></section>
+      <section class="view active" id="manualView">
+        <div class="chapter-layout">
+          <aside class="chapter-nav" id="chapterNav"></aside>
+          <article class="chapter-main" id="chapterMain"></article>
+        </div>
+      </section>
+
+      <section class="view" id="quickView">
+        <div class="manual-card"><h2>考前速记清单</h2><div class="quick-list" id="quickList"></div></div>
+      </section>
+
+      <section class="view" id="indexView">
+        <div class="manual-card"><h2>关键词索引</h2><div class="index-list" id="indexList"></div></div>
+      </section>
     </main>
 
     <nav class="bottom-nav" id="bottomNav" aria-label="手机底部导航">
-      <button data-view="chapters"><span>▦</span><b>章节</b></button>
-      <button data-view="hard"><span>◆</span><b>难点</b></button>
-      <button data-view="mock"><span>▣</span><b>模考</b></button>
-      <button data-view="wrong"><span>!</span><b>错题</b></button>
-      <button data-view="progress"><span>▤</span><b>进度</b></button>
+      <button data-view="manual"><span>▦</span><b>手册</b></button>
+      <button data-view="quick"><span>◆</span><b>速记</b></button>
+      <button data-view="index"><span>⌕</span><b>索引</b></button>
     </nav>
   </div>
-  <script src="data.js"></script>
-  <script src="hard.js"></script>
+  <script src="notes.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
