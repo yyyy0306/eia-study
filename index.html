@@ -13,7 +13,7 @@
         <div>
           <p class="eyebrow">EIA EXAM STUDIO</p>
           <h1>环评考试重点复习库</h1>
-          <p class="subhead">章节学习、知识点速查、章节练习、自测抽题、薄弱点复盘，一套网页直接打开。</p>
+          <p class="subhead">章节学习、知识点速查、错题本、高频难点、模拟考试，一套网页直接打开。</p>
         </div>
         <div class="top-actions">
           <button class="icon-btn" id="themeBtn" title="切换深浅色">◐</button>
@@ -43,7 +43,10 @@
           <nav class="tabs" id="tabs">
             <button class="tab active" data-view="chapters">章节学习</button>
             <button class="tab" data-view="library">知识点库</button>
+            <button class="tab" data-view="hard">高频难点</button>
             <button class="tab" data-view="quiz">练习自测</button>
+            <button class="tab" data-view="wrong">错题本</button>
+            <button class="tab" data-view="mock">模拟考试</button>
             <button class="tab" data-view="progress">复习进度</button>
           </nav>
         </div>
@@ -61,33 +64,25 @@
         <div class="intel-card"><h2>今日建议</h2><ol id="todayPlan"></ol></div>
       </section>
 
-      <section class="view active" id="chaptersView">
-        <div class="chapter-layout">
-          <aside class="chapter-nav" id="chapterNav"></aside>
-          <article class="chapter-main" id="chapterMain"></article>
-        </div>
-      </section>
-
-      <section class="view" id="libraryView">
-        <div class="result-line"><span id="resultText"></span><span>状态会自动保存在当前浏览器</span></div>
-        <div class="cards" id="cards"></div>
-      </section>
-
-      <section class="view" id="quizView">
-        <div class="quiz-card">
-          <h2>随机练习</h2>
-          <p>先自己回答，再展开答案。不会的题标为薄弱，考前集中复盘。</p>
-          <div class="quiz-box" id="quizBox"></div>
-          <div class="actions"><button class="btn primary" id="drawBtn">随机抽题</button><button class="btn" id="answerBtn">展开答案</button><button class="btn weak" id="markWeakBtn">标为薄弱</button></div>
-        </div>
-      </section>
-
-      <section class="view" id="progressView">
-        <div class="progress-list" id="progressList"></div>
-      </section>
+      <section class="view active" id="chaptersView"><div class="chapter-layout"><aside class="chapter-nav" id="chapterNav"></aside><article class="chapter-main" id="chapterMain"></article></div></section>
+      <section class="view" id="libraryView"><div class="result-line"><span id="resultText"></span><span>状态会自动保存在当前浏览器</span></div><div class="cards" id="cards"></div></section>
+      <section class="view" id="hardView"><div class="result-line"><span>高频难点专项</span><span>更接近案例分析和综合判断</span></div><div class="hard-list" id="hardList"></div></section>
+      <section class="view" id="quizView"><div class="quiz-card"><h2>随机练习</h2><p>先自己回答，再展开答案。不会的题标为错题或薄弱。</p><div class="quiz-box" id="quizBox"></div><div class="actions"><button class="btn primary" id="drawBtn">随机抽题</button><button class="btn" id="answerBtn">展开答案</button><button class="btn weak" id="markWrongBtn">加入错题</button><button class="btn weak" id="markWeakBtn">标为薄弱</button></div></div></section>
+      <section class="view" id="wrongView"><div class="result-line"><span id="wrongTitle">错题本</span><span>错题存在当前浏览器，可导出备份</span></div><div class="hard-list" id="wrongList"></div></section>
+      <section class="view" id="mockView"><div class="quiz-card"><h2>模拟考试</h2><p>每次抽 10 道题，提交后显示分数、错题和解析。</p><div class="exam-meta" id="examMeta"></div><div class="mock-list" id="mockList"></div><div class="actions"><button class="btn primary" id="newMockBtn">生成新试卷</button><button class="btn" id="submitMockBtn">交卷评分</button></div></div></section>
+      <section class="view" id="progressView"><div class="progress-list" id="progressList"></div></section>
     </main>
+
+    <nav class="bottom-nav" id="bottomNav" aria-label="手机底部导航">
+      <button data-view="chapters"><span>▦</span><b>章节</b></button>
+      <button data-view="hard"><span>◆</span><b>难点</b></button>
+      <button data-view="mock"><span>▣</span><b>模考</b></button>
+      <button data-view="wrong"><span>!</span><b>错题</b></button>
+      <button data-view="progress"><span>▤</span><b>进度</b></button>
+    </nav>
   </div>
   <script src="data.js"></script>
+  <script src="hard.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
