@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>环评考试重点复习库</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app" data-theme="light">
+    <header class="topbar">
+      <div class="shell topbar-inner">
+        <div>
+          <p class="eyebrow">EIA EXAM STUDIO</p>
+          <h1>环评考试重点复习库</h1>
+          <p class="subhead">章节学习、知识点速查、章节练习、自测抽题、薄弱点复盘，一套网页直接打开。</p>
+        </div>
+        <div class="top-actions">
+          <button class="icon-btn" id="themeBtn" title="切换深浅色">◐</button>
+          <button class="btn" id="exportBtn">导出进度</button>
+          <label class="btn ghost" for="importFile">导入进度</label>
+          <input id="importFile" type="file" accept="application/json" hidden>
+        </div>
+      </div>
+    </header>
+
+    <main class="shell">
+      <section class="dashboard">
+        <div class="search-panel">
+          <label for="searchInput">搜索知识点</label>
+          <div class="search-grid">
+            <input id="searchInput" type="search" placeholder="例如：公众参与、总纲、事故池、危废、评价范围">
+            <select id="subjectSelect"></select>
+            <select id="statusSelect">
+              <option value="全部">全部</option>
+              <option value="高频">高频</option>
+              <option value="常考">常考</option>
+              <option value="收藏">收藏</option>
+              <option value="薄弱">薄弱</option>
+              <option value="掌握">掌握</option>
+            </select>
+          </div>
+          <nav class="tabs" id="tabs">
+            <button class="tab active" data-view="chapters">章节学习</button>
+            <button class="tab" data-view="library">知识点库</button>
+            <button class="tab" data-view="quiz">练习自测</button>
+            <button class="tab" data-view="progress">复习进度</button>
+          </nav>
+        </div>
+        <aside class="stats">
+          <div><strong id="topicCount">0</strong><span>知识点</span></div>
+          <div><strong id="questionCount">0</strong><span>练习题</span></div>
+          <div><strong id="doneCount">0</strong><span>已掌握</span></div>
+          <div><strong id="weakCount">0</strong><span>薄弱点</span></div>
+        </aside>
+      </section>
+
+      <section class="intel">
+        <div class="intel-card"><h2>高频雷达</h2><div id="radar"></div></div>
+        <div class="intel-card"><h2>案例题眼词</h2><div class="word-cloud" id="wordCloud"></div></div>
+        <div class="intel-card"><h2>今日建议</h2><ol id="todayPlan"></ol></div>
+      </section>
+
+      <section class="view active" id="chaptersView">
+        <div class="chapter-layout">
+          <aside class="chapter-nav" id="chapterNav"></aside>
+          <article class="chapter-main" id="chapterMain"></article>
+        </div>
+      </section>
+
+      <section class="view" id="libraryView">
+        <div class="result-line"><span id="resultText"></span><span>状态会自动保存在当前浏览器</span></div>
+        <div class="cards" id="cards"></div>
+      </section>
+
+      <section class="view" id="quizView">
+        <div class="quiz-card">
+          <h2>随机练习</h2>
+          <p>先自己回答，再展开答案。不会的题标为薄弱，考前集中复盘。</p>
+          <div class="quiz-box" id="quizBox"></div>
+          <div class="actions"><button class="btn primary" id="drawBtn">随机抽题</button><button class="btn" id="answerBtn">展开答案</button><button class="btn weak" id="markWeakBtn">标为薄弱</button></div>
+        </div>
+      </section>
+
+      <section class="view" id="progressView">
+        <div class="progress-list" id="progressList"></div>
+      </section>
+    </main>
+  </div>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
